@@ -183,10 +183,9 @@ public class SwiftMultiImagePickerPlugin: NSObject, FlutterPlugin {
             
             return result(FlutterError(code: "ASSET_DOES_NOT_EXIST", message: "The requested image does not exist.", details: nil))
         case "requestOriginal":
-            print("requestOriginal")
             let arguments = call.arguments as! Dictionary<String, AnyObject>
             let identifier = arguments["identifier"] as! String
-            let quality = arguments["quality"] as! Int
+            
             let manager = PHImageManager.default()
             let options = PHImageRequestOptions()
 
@@ -199,16 +198,11 @@ public class SwiftMultiImagePickerPlugin: NSObject, FlutterPlugin {
 
             if (assets.count > 0) {
                 let asset: PHAsset = assets[0];
-
-                let ID: PHImageRequestID = manager.requestImage(
-                    for: asset,
-                    targetSize: PHImageManagerMaximumSize,
-                    contentMode: PHImageContentMode.aspectFill,
-                    options: options,
-                    resultHandler: {
-                        (image: UIImage?, info) in
-                        self.messenger.send(onChannel: "multi_image_picker/image/" + identifier + ".original", message: image!.jpegData(compressionQuality: CGFloat(quality / 100)))
-                })
+               
+                let ID: PHImageRequestID  = manager.requestImageData(
+                for: asset, options: options) { (data, str, ori, info) in
+                    self.messenger.send(onChannel: "multi_image_picker/image/" + identifier + ".original", message: data!)
+                }
 
                 if(PHInvalidImageRequestID != ID) {
                     return result(true);
