@@ -183,6 +183,7 @@ public class SwiftMultiImagePickerPlugin: NSObject, FlutterPlugin {
             
             return result(FlutterError(code: "ASSET_DOES_NOT_EXIST", message: "The requested image does not exist.", details: nil))
         case "requestOriginal":
+            print("requestOriginal")
             let arguments = call.arguments as! Dictionary<String, AnyObject>
             let identifier = arguments["identifier"] as! String
             let quality = arguments["quality"] as! Int
