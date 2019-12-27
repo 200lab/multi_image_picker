@@ -232,14 +232,14 @@ public class MultiImagePickerPlugin implements
 
                 if (bitmap == null) return null;
 
-                int size = bitmap.getRowBytes() * bitmap.getHeight();
-                ByteBuffer byteBuffer = ByteBuffer.allocate(size);
-                bitmap.copyPixelsToBuffer(byteBuffer);
-                bytesArray = byteBuffer.array();
+                ByteArrayOutputStream bitmapStream = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, this.quality, bitmapStream);
+                bytesArray = bitmapStream.toByteArray();
                 bitmap.recycle();
-            } catch (IOException e) {
+                bitmapStream.close();
+           } catch (IOException e) {
                 e.printStackTrace();
-            }
+           }
 
             assert bytesArray != null;
             final ByteBuffer buffer = ByteBuffer.allocateDirect(bytesArray.length);
