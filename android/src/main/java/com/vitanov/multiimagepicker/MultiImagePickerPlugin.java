@@ -287,6 +287,8 @@ public class MultiImagePickerPlugin implements
                 ExifInterface.TAG_IMAGE_WIDTH,
                 ExifInterface.TAG_IMAGE_LENGTH,
                 ExifInterface.TAG_MAKE,
+                ExifInterface.TAG_LENS_MAKE,
+                ExifInterface.TAG_LENS_MODEL,
                 ExifInterface.TAG_MODEL
         };
         String[] tags_double = {
