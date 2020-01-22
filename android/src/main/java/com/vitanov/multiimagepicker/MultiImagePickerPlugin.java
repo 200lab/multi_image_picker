@@ -299,7 +299,7 @@ public class MultiImagePickerPlugin implements
                 ExifInterface.TAG_GPS_LATITUDE,
                 ExifInterface.TAG_IMAGE_LENGTH,
                 ExifInterface.TAG_IMAGE_WIDTH,
-                ExifInterface.TAG_ISO_SPEED,
+                ExifInterface.TAG_PHOTOGRAPHIC_SENSITIVITY,
                 ExifInterface.TAG_ORIENTATION,
                 ExifInterface.TAG_WHITE_BALANCE,
                 ExifInterface.TAG_EXPOSURE_TIME
